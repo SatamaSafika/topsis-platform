@@ -70,7 +70,9 @@ const InputKriteria = () => {
           <div className="alternatif-middle center-content">
             <label>
               Stok Saat Ini
-              <span className="caption">Jumlah stok yang tersedia saat ini</span>
+              <span className="caption">Jumlah stok di tempat penyimpanan
+
+</span>
               <input
                 type="number"
                 value={item.stokSaatIni}
@@ -81,7 +83,7 @@ const InputKriteria = () => {
 
             <label>
               Waktu Pengiriman
-              <span className="caption">Perkiraan waktu pengiriman (hari)</span>
+              <span className="caption">Perkiraan lama waktu pengiriman (hari)</span>
               <input
                 type="number"
                 value={item.waktuPengiriman}
@@ -92,7 +94,7 @@ const InputKriteria = () => {
 
             <label>
               Harga
-              <span className="caption">Harga per unit barang</span>
+              <span className="caption">Harga per unit sesuai penawaran pemasok</span>
               <input
                 type="number"
                 value={item.harga}
@@ -103,7 +105,7 @@ const InputKriteria = () => {
 
             <label>
               Layanan
-              <span className="caption">Penilaian kualitas layanan pemasok</span>
+              <span className="caption">Seperti penilaian kecepatan respon (1-10) </span>
               <input
                 type="number"
                 value={item.layanan}
@@ -117,7 +119,7 @@ const InputKriteria = () => {
           <div className="alternatif-right center-content">
             <label>
               Urgency
-              <span className="caption">Tingkat urgensi kebutuhan</span>
+              <span className="caption">Seberapa mendesak kebutuhan (1-10)</span>
               <input
                 type="number"
                 value={item.urgency}
@@ -128,7 +130,7 @@ const InputKriteria = () => {
 
             <label>
               Stok Dibutuhkan
-              <span className="caption">Jumlah stok yang dibutuhkan</span>
+              <span className="caption">Jumlah barang untuk operasional</span>
               <input
                 type="number"
                 value={item.stokDibutuhkan}
@@ -139,7 +141,7 @@ const InputKriteria = () => {
 
             <label>
               Kelangkaan
-              <span className="caption">Tingkat kelangkaan barang di pasar</span>
+              <span className="caption">Kesulitan mendapatkan barang (1-10)</span>
               <input
                 type="number"
                 value={item.kelangkaan}
@@ -150,7 +152,7 @@ const InputKriteria = () => {
 
             <label>
               Kualitas
-              <span className="caption">Penilaian kualitas produk</span>
+              <span className="caption">Seperti keefektifan barang (1-10)</span>
               <input
                 type="number"
                 value={item.kualitas}
