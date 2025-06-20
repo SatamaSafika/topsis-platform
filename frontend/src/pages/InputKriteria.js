@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import '../index.css';
 
 const InputKriteria = () => {
   const navigate = useNavigate();
@@ -8,26 +9,25 @@ const InputKriteria = () => {
   const [alternatif, setAlternatif] = useState([]);
 
   useEffect(() => {
-  const storedJumlah = parseInt(localStorage.getItem('jumlahAlternatif'));
-  if (!storedJumlah || storedJumlah <= 0) {
-    navigate('/');
-  } else {
-    setJumlah(storedJumlah);
-    const initialData = Array.from({ length: storedJumlah }, () => ({
-      name: '',
-      urgency: '',
-      stokSaatIni: '',
-      stokDibutuhkan: '',
-      waktuPengiriman: '',
-      kelangkaan: '',
-      harga: '',
-      kualitas: '',
-      layanan: ''
-    }));
-    setAlternatif(initialData);
-  }
-}, [navigate]);
-
+    const storedJumlah = parseInt(localStorage.getItem('jumlahAlternatif'));
+    if (!storedJumlah || storedJumlah <= 0) {
+      navigate('/');
+    } else {
+      setJumlah(storedJumlah);
+      const initialData = Array.from({ length: storedJumlah }, () => ({
+        name: '',
+        urgency: '',
+        stokSaatIni: '',
+        stokDibutuhkan: '',
+        waktuPengiriman: '',
+        kelangkaan: '',
+        harga: '',
+        kualitas: '',
+        layanan: ''
+      }));
+      setAlternatif(initialData);
+    }
+  }, [navigate]);
 
   const handleChange = (index, field, value) => {
     const updated = [...alternatif];
@@ -37,10 +37,8 @@ const InputKriteria = () => {
 
   const handleSubmit = async () => {
     try {
-      // kirim ke backend
       const response = await axios.post('http://localhost:5000/api/topsis', alternatif);
       console.log(response.data);
-      // simpan hasil sementara ke localstorage utk hasil nanti
       localStorage.setItem('topsisResult', JSON.stringify(response.data));
       navigate('/hasil-keputusan');
     } catch (err) {
@@ -50,111 +48,123 @@ const InputKriteria = () => {
   };
 
   return (
-    <div className="p-6 bg-gray-100 min-h-screen">
-      <h1 className="text-2xl font-bold mb-4">Input Data Alternatif</h1>
+    <div className="input-container">
+      <h1 className="input-title">Input Data Alternatif</h1>
 
       {alternatif.map((item, index) => (
-        <div key={index} className="bg-white p-4 mb-4 rounded shadow">
-          <h2 className="font-semibold mb-2">Alternatif #{index + 1}</h2>
-          
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label>Nama</label>
-              <input
-                type="text"
-                value={item.name}
-                onChange={e => handleChange(index, 'name', e.target.value)}
-                className="border rounded w-full p-2"
-              />
-            </div>
+        <div key={index} className="alternatif-card flex">
+          {/* Bagian Kiri */}
+          <div className="alternatif-left">
+            <h2 className="alternatif-title">Alternatif {index + 1}</h2>
+            <input
+              type="text"
+              value={item.name}
+              onChange={e => handleChange(index, 'name', e.target.value)}
+              className="input-field"
+              placeholder="Masukkan nama alternatif"
+            />
+            <img src="/alat.jpg" alt="Alternatif Icon" className="alternatif-icon" />
+          </div>
 
-            <div>
-              <label>Urgency</label>
-              <input
-                type="number"
-                value={item.urgency}
-                onChange={e => handleChange(index, 'urgency', e.target.value)}
-                className="border rounded w-full p-2"
-              />
-            </div>
-
-            <div>
-              <label>Stok Saat Ini</label>
+          {/* Bagian Tengah */}
+          <div className="alternatif-middle center-content">
+            <label>
+              Stok Saat Ini
+              <span className="caption">Jumlah stok yang tersedia saat ini</span>
               <input
                 type="number"
                 value={item.stokSaatIni}
                 onChange={e => handleChange(index, 'stokSaatIni', e.target.value)}
-                className="border rounded w-full p-2"
+                className="input-field"
               />
-            </div>
+            </label>
 
-            <div>
-              <label>Stok Dibutuhkan</label>
-              <input
-                type="number"
-                value={item.stokDibutuhkan}
-                onChange={e => handleChange(index, 'stokDibutuhkan', e.target.value)}
-                className="border rounded w-full p-2"
-              />
-            </div>
-
-            <div>
-              <label>Waktu Pengiriman</label>
+            <label>
+              Waktu Pengiriman
+              <span className="caption">Perkiraan waktu pengiriman (hari)</span>
               <input
                 type="number"
                 value={item.waktuPengiriman}
                 onChange={e => handleChange(index, 'waktuPengiriman', e.target.value)}
-                className="border rounded w-full p-2"
+                className="input-field"
               />
-            </div>
+            </label>
 
-            <div>
-              <label>Kelangkaan</label>
-              <input
-                type="number"
-                value={item.kelangkaan}
-                onChange={e => handleChange(index, 'kelangkaan', e.target.value)}
-                className="border rounded w-full p-2"
-              />
-            </div>
-
-            <div>
-              <label>Harga</label>
+            <label>
+              Harga
+              <span className="caption">Harga per unit barang</span>
               <input
                 type="number"
                 value={item.harga}
                 onChange={e => handleChange(index, 'harga', e.target.value)}
-                className="border rounded w-full p-2"
+                className="input-field"
               />
-            </div>
+            </label>
 
-            <div>
-              <label>Kualitas</label>
-              <input
-                type="number"
-                value={item.kualitas}
-                onChange={e => handleChange(index, 'kualitas', e.target.value)}
-                className="border rounded w-full p-2"
-              />
-            </div>
-
-            <div>
-              <label>Layanan</label>
+            <label>
+              Layanan
+              <span className="caption">Penilaian kualitas layanan pemasok</span>
               <input
                 type="number"
                 value={item.layanan}
                 onChange={e => handleChange(index, 'layanan', e.target.value)}
-                className="border rounded w-full p-2"
+                className="input-field"
               />
-            </div>
+            </label>
+          </div>
+
+          {/* Bagian Kanan */}
+          <div className="alternatif-right center-content">
+            <label>
+              Urgency
+              <span className="caption">Tingkat urgensi kebutuhan</span>
+              <input
+                type="number"
+                value={item.urgency}
+                onChange={e => handleChange(index, 'urgency', e.target.value)}
+                className="input-field"
+              />
+            </label>
+
+            <label>
+              Stok Dibutuhkan
+              <span className="caption">Jumlah stok yang dibutuhkan</span>
+              <input
+                type="number"
+                value={item.stokDibutuhkan}
+                onChange={e => handleChange(index, 'stokDibutuhkan', e.target.value)}
+                className="input-field"
+              />
+            </label>
+
+            <label>
+              Kelangkaan
+              <span className="caption">Tingkat kelangkaan barang di pasar</span>
+              <input
+                type="number"
+                value={item.kelangkaan}
+                onChange={e => handleChange(index, 'kelangkaan', e.target.value)}
+                className="input-field"
+              />
+            </label>
+
+            <label>
+              Kualitas
+              <span className="caption">Penilaian kualitas produk</span>
+              <input
+                type="number"
+                value={item.kualitas}
+                onChange={e => handleChange(index, 'kualitas', e.target.value)}
+                className="input-field"
+              />
+            </label>
           </div>
         </div>
       ))}
 
-      <button
-        onClick={handleSubmit}
-        className="bg-green-500 text-white px-6 py-3 rounded hover:bg-green-600"
-      >
+      <h1 className="input-subtitle">Input Data Alternatif (Jumlah: {jumlah})</h1>
+
+      <button onClick={handleSubmit} className="submit-button">
         Proses
       </button>
     </div>

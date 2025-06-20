@@ -18,35 +18,41 @@ const HasilKeputusan = () => {
     return <div className="p-6">Memuat hasil keputusan...</div>;
   }
 
-  const pemenang = hasil[0]; // karena hasil sudah di-sort dari backend
+  const pemenang = hasil[0];
 
   return (
-    <div className="p-6 bg-gray-100 min-h-screen">
-      <h1 className="text-2xl font-bold mb-4">Hasil Keputusan TOPSIS</h1>
+    <div className="hasil-page-container">
+      <h1 className="hasil-page-title">Hasil Keputusan</h1>
 
-      <div className="bg-white p-4 rounded shadow mb-6">
-        <h2 className="text-xl font-semibold">Alternatif Terbaik:</h2>
-        <p className="text-green-600 text-2xl font-bold">{pemenang.name}</p>
-        <p className="text-gray-700">Skor: {pemenang.score.toFixed(4)}</p>
+      {/* Card Alternatif Terbaik */}
+      <div className="hasil-card-horizontal">
+        <div className="hasil-card-text">
+          <div className="hasil-winner-name">{pemenang.name}</div>
+          <div className="hasil-winner-score">Skor: {pemenang.score.toFixed(4)}</div>
+          <div className="hasil-caption">Alternatif dengan skor tertinggi berdasarkan metode TOPSIS.</div>
+        </div>
+
+        <img src="/rank1.png" alt="Pemenang" className="hasil-card-image" />
       </div>
 
-      <div className="bg-white p-4 rounded shadow">
-        <h2 className="text-xl font-semibold mb-4">Ranking Lengkap:</h2>
+      {/* Card Ranking Lengkap */}
+      <div className="hasil-ranking-card">
+        <div className="hasil-ranking-title">Ranking Lengkap</div>
 
-        <table className="w-full border-collapse">
+        <table className="hasil-table">
           <thead>
-            <tr className="bg-gray-200">
-              <th className="border px-4 py-2">#</th>
-              <th className="border px-4 py-2">Nama Alternatif</th>
-              <th className="border px-4 py-2">Skor</th>
+            <tr>
+              <th>#</th>
+              <th>Nama Alternatif</th>
+              <th>Skor</th>
             </tr>
           </thead>
           <tbody>
             {hasil.map((item, index) => (
-              <tr key={index} className="text-center">
-                <td className="border px-4 py-2">{index + 1}</td>
-                <td className="border px-4 py-2">{item.name}</td>
-                <td className="border px-4 py-2">{item.score.toFixed(4)}</td>
+              <tr key={index}>
+                <td>{index + 1}</td>
+                <td>{item.name}</td>
+                <td>{item.score.toFixed(4)}</td>
               </tr>
             ))}
           </tbody>
