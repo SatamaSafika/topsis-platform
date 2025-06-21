@@ -349,7 +349,7 @@ code {
   padding: 2rem;
   background-color: #dbeafe; /* biru muda (Tailwind bg-blue-200) */
   min-height: 100vh;
-  color: #1e3a8a; /* biru tua untuk teks (Tailwind text-blue-900) */
+  color: white; /* biru tua untuk teks (Tailwind text-blue-900) */
 }
 
 .hasil-page-title {
