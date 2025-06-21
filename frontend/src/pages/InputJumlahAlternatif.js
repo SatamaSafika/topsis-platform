@@ -22,10 +22,9 @@ const InputJumlahAlternatif = () => {
     <div className="jumlah-container flex">
       {/* Bagian Kiri: Form */}
       <div className="form-section">
-        <h1 className="jumlah-title">Sistem Pengambilan Keputusan - TOPSIS</h1>
-
+        <h1 className="jumlah-title">Optimalkan Pengadaan Alat Kesehatan Rumah Sakit</h1>
         <div className="jumlah-card">
-  <label className="jumlah-label">Berapa alternatif kamu?</label>
+  <label className="jumlah-label">Berapa jumlah alternatif pembelian kamu?</label>
   
           {/* Tambahkan container untuk input dan tombol */}
           <div className="input-button-group">
